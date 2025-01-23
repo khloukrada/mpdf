@@ -26853,6 +26853,12 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 					continue;
 				}
 
+                // ignore if in element with forcedFont_ attr
+                if ($i > 0 && preg_match('/class=[\'\"]forcedFont_(.*?)[\'\"]/ism', $a[$i - 1], $mm)) {
+                    $a[$i] = $e;
+                    continue;
+                }
+
 				$e = UtfString::strcode2utf($e);
 				$e = $this->lesser_entity_decode($e);
 
